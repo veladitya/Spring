@@ -11,6 +11,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.core.annotation.Order;
 
+
 import com.fedex.blogger.entity.Customer;
 import com.fedex.blogger.entity.Role;
 import com.fedex.blogger.entity.User;
@@ -54,11 +55,11 @@ public class UiApplication extends SpringBootServletInitializer {
 			Role role = roleRepository.findOne(1);
 			log.info("Role found with findOne(1L):");
 			log.info("--------------------------------");
-			log.info(role.toString());
+			log.info(role!= null? role.toString(): "No Role Found");
 			log.info("");
 
 			// save an user with Admin roles
-			User userAdmin = new User("admin", "admin", "admin@blogger.com");
+			User userAdmin = new User("admin", "admin", "admin@blogger.com", "ROLE_ADMIN");
 			userAdmin.setRoles(roleRepository.findAllByOrderByNameAsc());
 
 			userRepository.save(userAdmin);
@@ -87,7 +88,7 @@ public class UiApplication extends SpringBootServletInitializer {
 			Customer customer = repository.findOne(1L);
 			log.info("Customer found with findOne(1L):");
 			log.info("--------------------------------");
-			log.info(customer.toString());
+			log.info(customer!= null?customer.toString(): "No Customer Found");
 			log.info("");
 
 			// fetch customers by last name

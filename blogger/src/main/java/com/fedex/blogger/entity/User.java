@@ -8,17 +8,19 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.Email;
 import com.fedex.blogger.entity.annotations.UniqueUsername;
 
-@Entity
+@Entity(name="users")
 public class User {
 
 	@Id
-	@GeneratedValue
+	@GeneratedValue 
 	private Integer id;
 	
 	@Size(min = 3, message = "Name is not valid")
@@ -27,6 +29,7 @@ public class User {
 	private String name;
 	
 	@Size(min = 1)
+	@NotNull
 	@Email
 	private String email;
 	
@@ -35,14 +38,17 @@ public class User {
 	
 	private boolean enabled;
 	
+	private String userRole;
+	
 	public User() {
 	
 	}
 	
-	public User(String name, String password, String email) {
+	public User(String name, String password, String email, String userRole) {
 		this.name = name;
 		this.password=password;
 		this.email=email;
+		this.userRole = userRole;
 	}
 	
 	public boolean isEnabled() {
@@ -53,7 +59,7 @@ public class User {
 		this.enabled = enabled;
 	}
 
-	@OneToMany
+	@ManyToMany
 	@JoinTable
 	private List<Role> roles;
 
@@ -108,4 +114,13 @@ public class User {
 		this.id = id;
 	}
 
+	public String getUserRole() {
+		return userRole;
+	}
+
+	public void setUserRole(String userRole) {
+		this.userRole = userRole;
+	}
+
+	
 }

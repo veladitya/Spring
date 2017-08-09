@@ -1,0 +1,25 @@
+<!doctype html>
+<html>
+<head>
+<title>Hello AngularJS</title>
+<link href="libraries/bootstrap-3.3.6/css/bootstrap.min.css"
+	rel="stylesheet">
+<style type="text/css">
+[ng\:cloak], [ng-cloak], .ng-cloak {
+	display: none !important;
+}
+</style>
+</head>
+
+<body ng-app="demoApp">
+	<div class="container">
+		<h1>Greeting</h1>
+		<div ng-controller="demoController as greetingController" ng-cloak
+			class="ng-cloak">
+			<p>The ID is {{greetingController.greeting.id}}</p>
+			<p>The content is {{greetingController.greeting.content}}</p>
+		</div>
+	</div>
+	<script data-main="js/main.js" src="libraries/requirejs/require.js"></script>
+</body>
+</html>

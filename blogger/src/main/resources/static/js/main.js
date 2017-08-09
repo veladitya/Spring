@@ -4,14 +4,19 @@
 require.config({
 	paths : {
 		'angular' : '../libraries/angular-1.5.7/angular',
-		'ngResource' : '../libraries/angular-1.5.7/angular-resource'
+		'angular-resource' : '../libraries/angular-1.5.7/angular-resource',
+		'angular-route' : '../libraries/angular-1.5.7/angular-route'
 	},
 	shim : {
-		ngResource : {
+		'angular-resource' : {
 			deps : [ 'angular' ],
 			exports : 'angular'
 		},
-		angular : {
+		'angular-route' : {
+			deps : [ 'angular' ],
+			exports : 'angular'
+		},
+		'angular' : {
 			exports : 'angular'
 		}
 	},

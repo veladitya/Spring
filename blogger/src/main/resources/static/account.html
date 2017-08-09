@@ -1,0 +1,78 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+
+<script>
+	$(document).ready(
+			function() {
+				var validClass = "has-success";
+				var errorClass = "has-error";
+				$('.blogRegistration').validate(
+						{
+							rules : {
+								name : {
+									required : true,
+									minlength : 3
+								},
+								url : {
+									required : true,
+									url : true
+								}
+							},
+							highlight : function(element) {
+								$(element).closest('.form-group').addClass(errorClass).removeClass(validClass);
+							},
+							unhighlight : function(element) {
+								$(element).closest('.form-group').removeClass(errorClass).addClass(validClass);
+							}
+
+						});
+			});
+</script>
+
+<form:form commandName="blog" cssClass="form-horizontal blogRegistration" action="./account.do" method="post">
+	<!-- Button trigger modal -->
+	<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">New Blog</button>
+
+	<!-- Modal -->
+	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<h4 class="modal-title" id="myModalLabel">Blog</h4>
+				</div>
+
+				<div class="modal-body">
+
+					<div class="form-group">
+						<label for="inputName" class="col-sm-2 control-label">Name</label>
+						<div class="col-sm-10">
+							<form:input path="name" cssClass="form-control" />
+							<form:errors path="name" />
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="inputUrl" class="col-sm-2 control-label">Url</label>
+						<div class="col-sm-10">
+							<form:input path="url" cssClass="form-control" />
+							<form:errors path="url" />
+						</div>
+					</div>
+					<br /> <br />
+
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+					<input type="submit" class="btn btn-primary" value="Save" />
+				</div>
+
+			</div>
+		</div>
+	</div>
+</form:form>
+<br />
+<jsp:include page="user-details.jsp"></jsp:include>
