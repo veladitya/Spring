@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+	<springProperty scope="context" name="ACTIVE_PROFILE" source="spring.profiles.active"/>
+	<property resource="logger\logger_${ACTIVE_PROFILE}.properties" />
+	<appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+		<encoder>
+			<charset>UTF-8</charset>
+			<Pattern>${log.rollover_pattern}</Pattern>
+		</encoder>
+	</appender>
+	
+	<appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<file>logs/ils.log</file>
+		<rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
+			<fileNamePattern>logs/ils.%i.log
+			</fileNamePattern>
+			<minIndex>1</minIndex>
+			<maxIndex>${log.max_file_index}</maxIndex>
+		</rollingPolicy>
+		<triggeringPolicy class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
+			<maxFileSize>${log.max_file_size}</maxFileSize>
+		</triggeringPolicy>
+
+		<encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+			<charset>UTF-8</charset>
+			<pattern>${log.rollover_pattern}</pattern>
+		</encoder>
+	</appender>
+
+	<appender name="FILE_AUDIT" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<file>logs/ils_audit.log</file>
+		<rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
+			<fileNamePattern>logs/ils_audit.%i.log
+			</fileNamePattern>
+			<minIndex>1</minIndex>
+			<maxIndex>${log.max_file_index}</maxIndex>
+		</rollingPolicy>
+		<triggeringPolicy class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
+			<maxFileSize>${log.max_file_size}</maxFileSize>
+		</triggeringPolicy>
+
+		<encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+			<charset>UTF-8</charset>
+			<pattern>${log.rollover_pattern}</pattern>
+		</encoder>
+	</appender>
+
+	<springProfile name="local,L0,L1">
+		<logger name="application" level="INFO" additivity="false">
+			<appender-ref ref="CONSOLE" />
+			<appender-ref ref="FILE" />
+		</logger>
+		<logger name="profiler" level="INFO" additivity="false">
+			<appender-ref ref="CONSOLE" />
+			<appender-ref ref="FILE_AUDIT" />
+		</logger>
+	</springProfile>
+	<springProfile name="production">
+		<logger name="application" level="WARN" additivity="false">
+			<appender-ref ref="CONSOLE" />
+			<appender-ref ref="FILE" />
+		</logger>
+	</springProfile>
+</configuration>

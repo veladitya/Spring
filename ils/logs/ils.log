@@ -1,0 +1,8 @@
+01/09/2017 08:50:26.419 application - Logger initialized
+01/09/2017 08:52:47.714 application application - Logger initialized
+2017-09-01 09:01:11.189  INFO [           main]  application                              :  Logger initialized
+2017-09-01 09:13:24.956  INFO 18780 --- [           main] com.fedex.lhos.ils.common.logging.Logger : Logger initialized
+2017-09-01 11:28:15.291  INFO 22600 --- [           main] com.fedex.lhos.ils.common.logging.Logger : Logger initialized-Aditya
+2017-09-14 15:25:26.966  INFO 15340 --- [           main] com.fedex.lhso.ils.logging.Logger : Logger initialized
+2017-09-14 15:55:40.516  INFO 14000 --- [           main] com.fedex.lhso.ils.logging.Logger : Logger initialized
+2017-09-15 13:23:19.366  INFO 15212 --- [           main] com.fedex.lhso.ils.logging.Logger : Logger initialized
