@@ -14,16 +14,21 @@ import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.URL;
 
+import com.fasterxml.jackson.annotation.JsonView;
+import com.fedex.blogger.views.View;
+
 @Entity
 public class Blog {
-
+	@JsonView(View.UserInfo.class)
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	
+	@JsonView(View.UserInfo.class)
 	@Size(min=3, message="Blog Name is not valid")
 	private String name;
 	
+	@JsonView(View.UserInfo.class)
 	@Size(min=1)
 	@URL
 	private String url;
@@ -32,6 +37,7 @@ public class Blog {
 	@JoinColumn(name="user_id")
 	private User user;
 	
+	@JsonView(View.UserInfo.class)
 	@OneToMany(mappedBy="blog", cascade=CascadeType.REMOVE)
 	private List<Item> items;
 	

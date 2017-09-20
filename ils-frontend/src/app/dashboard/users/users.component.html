@@ -1,0 +1,55 @@
+<head>
+    <!-- Load the Angular Material stylesheet -->
+    <link href="https://unpkg.com/@angular/material/prebuilt-themes/indigo-pink.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <style>
+        body {
+            font-family: Roboto, Arial, sans-serif;
+        }
+    </style>
+</head>
+<div class="example-container mat-elevation-z8">
+    <div class="example-header">
+        <md-input-container floatPlaceholder="never">
+            <input mdInput #filter placeholder="Filter users">
+        </md-input-container>
+    </div>
+
+    <md-table #table [dataSource]="dataSource" mdSort multiple>
+
+        <!--- Note that these columns can be defined in any order.
+			The actual rendered columns are set as a property on the row definition" -->
+
+        <!-- ID Column -->
+        <ng-container cdkColumnDef="userId">
+            <md-header-cell *cdkHeaderCellDef md-sort-header> ID </md-header-cell>
+            <md-cell *cdkCellDef="let row"> {{row.id}} </md-cell>
+        </ng-container>
+
+        <!-- Progress Column -->
+        <ng-container cdkColumnDef="email">
+            <md-header-cell *cdkHeaderCellDef md-sort-header> Email </md-header-cell>
+            <md-cell *cdkCellDef="let row">
+                <md-input-container class="example-full-width">
+                    <input mdInput value="{{row.email}}">
+                </md-input-container>
+            </md-cell>
+
+        </ng-container>
+
+        <!-- Name Column -->
+        <ng-container cdkColumnDef="userName">
+            <md-header-cell *cdkHeaderCellDef md-sort-header> Name </md-header-cell>
+            <md-cell *cdkCellDef="let row"> {{row.name}} </md-cell>
+        </ng-container>
+
+        <!-- Name Column -->
+        <ng-container cdkColumnDef="operation">
+            <md-header-cell *cdkHeaderCellDef md-sort-header> Operation </md-header-cell>
+            <md-cell *cdkCellDef="let row"> <a href='#' class="btn btn-danger triggerRemove">remove</a></md-cell>
+        </ng-container>
+
+        <md-header-row *cdkHeaderRowDef="displayedColumns"></md-header-row>
+        <md-row *cdkRowDef="let row; columns: displayedColumns;"></md-row>
+    </md-table>
+</div>

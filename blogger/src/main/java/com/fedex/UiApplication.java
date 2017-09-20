@@ -1,5 +1,7 @@
 package com.fedex;
 
+import java.text.SimpleDateFormat;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.CommandLineRunner;
@@ -10,7 +12,7 @@ import org.springframework.boot.web.support.SpringBootServletInitializer;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.core.annotation.Order;
-
+import org.springframework.http.converter.json.Jackson2ObjectMapperBuilder;
 
 import com.fedex.blogger.entity.Customer;
 import com.fedex.blogger.entity.Role;
@@ -100,4 +102,11 @@ public class UiApplication extends SpringBootServletInitializer {
 			log.info("");
 		};
 	}
+	
+	@Bean
+	public Jackson2ObjectMapperBuilder jacksonBuilder() {
+		Jackson2ObjectMapperBuilder b = new Jackson2ObjectMapperBuilder();
+		b.indentOutput(true).dateFormat(new SimpleDateFormat("yyyy-MM-dd"));
+		return b;
+	}		
 }

@@ -7,14 +7,18 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 
+import com.fasterxml.jackson.annotation.JsonView;
+import com.fedex.blogger.views.View;
+
 
 @Entity
 public class Role {
-
+	
+	@JsonView(View.UserInfo.class)
 	@Id
 	@GeneratedValue
 	private Integer id;
-	
+	@JsonView(View.UserInfo.class)
 	private String name;
 	
 	@ManyToMany(mappedBy="roles")

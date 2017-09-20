@@ -1,0 +1,24 @@
+<button class="btn btn-default" id="toggle-sidebar" type="button"
+	(click)="eventCalled()">&#9776;</button>
+<nav class="sidebar" [ngClass]="{sidebarPushRight: isActive}">
+	<ul class="list-group">
+		<a routerLink="/dashboard/home"
+			[routerLinkActive]="['router-link-active']" class="list-group-item">
+			<i class="fa fa-fw fa-dashboard"></i> Blog
+		</a>
+		<a [routerLink]="['chart']"
+			[routerLinkActive]="['router-link-active']"  class="list-group-item">
+			<i class="fa fa-fw fa-bar-chart-o"></i> Usage
+		</a>
+		<div [hidden]="!this.loginService.isAdmin()">
+		<a [routerLink]="['users']" 
+			[routerLinkActive]="['router-link-active']"  class="list-group-item">
+			<i class="fa fa-fw fa-users"></i> Users
+		</a>
+		</div>
+		<a [routerLink]="['tables']"
+			[routerLinkActive]="['router-link-active']" class="list-group-item">
+			<i class="fa fa-fw fa-table"></i> My Account
+		</a>
+	</ul>
+</nav>

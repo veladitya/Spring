@@ -1,0 +1,71 @@
+<div class="login-page">
+	<div class="row">
+		<div class="col-lg-4 col-lg-offset-4">
+			<img src="assets/img/SB-admin.png" width="150px;" class="user-avatar" />
+			<h1>Register</h1>
+			<form role="form" novalidate #f="ngForm" (ngSubmit)="onSubmit(f.value)">
+				<div class="form-content">
+					<div class="form-group">
+						<input	type="text" 
+								class="form-control input-underline input-lg"
+								name="name" 
+								placeholder="Name" 
+								ngModel
+								required
+								minlength="5"
+								#name="ngModel">
+						<div class="form-control-feedback"  *ngIf="name.errors && (name.dirty || name.touched)">
+							<p *ngIf="name.errors.required">Name is required</p>
+							<p *ngIf="name.errors.minlength">Name is not valid</p>
+						</div>
+					</div>
+
+					<div class="form-group">
+						<input type="email"
+						       class="form-control input-underline input-lg"
+						       name="email"
+						       ngModel
+						       required
+						       pattern="[^ @]*@[^ @]*"
+						       #email="ngModel"
+						       placeholder="Email">
+		       			<div class="form-control-feedback"  *ngIf="email.errors && (email.dirty || email.touched)">
+							<p *ngIf="email.errors.required">Email is required</p>
+							<p *ngIf="email.errors.pattern">Email must contain at least the @ character</p> 
+						</div>
+					</div>
+
+					<div class="form-group">
+						<input	type="password" 
+								class="form-control input-underline input-lg"
+								name="password" 
+								placeholder="Password" 
+								ngModel
+								required
+								minlength="5"
+								#password="ngModel">
+						<div class="form-control-feedback"  *ngIf="password.errors && (password.dirty || password.touched)">
+							<p *ngIf="password.errors.required">Password is required</p>
+							<p *ngIf="password.errors.minlength">Password is not valid</p>
+						</div>
+					</div>
+					<div class="form-group">
+						<select class="form-control input-underline input-lg"
+						        name="userRole"
+						       	ngModel
+						       	required
+						       	#userRole="ngModel">
+							<option value="">Please select a Role</option>
+							<option *ngFor="let role of roles" [value]="role.id">{{role.label}}</option>
+						</select>
+						<div class="form-control-feedback"  *ngIf="userRole.errors && (userRole.dirty || userRole.touched)">
+							<p *ngIf="userRole.errors.required">Role is required</p>
+						</div>
+					</div>
+				</div>
+				<button type="submit" class="btn rounded-btn" [disabled]="f.invalid"> Register </button>&nbsp; 
+				<a type="submit" class="btn rounded-btn" routerLink="/"> Log in </a>
+			</form>
+		</div>
+	</div>
+</div>

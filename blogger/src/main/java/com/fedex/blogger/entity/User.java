@@ -14,20 +14,26 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.Email;
+
+import com.fasterxml.jackson.annotation.JsonView;
 import com.fedex.blogger.entity.annotations.UniqueUsername;
+import com.fedex.blogger.views.View;
 
 @Entity(name="users")
 public class User {
 
+	@JsonView(View.UserInfo.class)
 	@Id
 	@GeneratedValue 
 	private Integer id;
 	
+	@JsonView(View.UserInfo.class)
 	@Size(min = 3, message = "Name is not valid")
 	@Column(unique = true)
 	@UniqueUsername
 	private String name;
 	
+	@JsonView(View.UserInfo.class)
 	@Size(min = 1)
 	@NotNull
 	@Email
@@ -38,6 +44,7 @@ public class User {
 	
 	private boolean enabled;
 	
+	@JsonView(View.UserInfo.class)
 	private String userRole;
 	
 	public User() {
@@ -59,10 +66,12 @@ public class User {
 		this.enabled = enabled;
 	}
 
+	@JsonView(View.UserInfo.class)
 	@ManyToMany
 	@JoinTable
 	private List<Role> roles;
 
+	@JsonView(View.UserInfo.class)
 	@OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE)
 	private List<Blog> blogs;
 

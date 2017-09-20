@@ -12,25 +12,33 @@ import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.validation.constraints.Size;
 
+import com.fasterxml.jackson.annotation.JsonView;
+import com.fedex.blogger.views.View;
+
 @Entity
 public class Item {
-
+	
+	@JsonView(View.UserInfo.class)
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	
+	@JsonView(View.UserInfo.class)
 	@Size(min = 3, message = "Title  is not valid")
 	@Column(length = 1000)
 	private String title;
 
+	@JsonView(View.UserInfo.class)
 	@Lob
 	@Column(length = Integer.MAX_VALUE)
 	@Size(min = 1, message = "Description is not valid")
 	private String description;
 
+	@JsonView(View.UserInfo.class)
 	@Column(name = "published_data")
 	private Date publishedDate;
 	
+	@JsonView(View.UserInfo.class)
 	@Column(length = 1000)
 	private String link;
 
